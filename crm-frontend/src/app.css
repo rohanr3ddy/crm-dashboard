@@ -1,0 +1,41 @@
+.app {
+  min-height: 100vh;
+  background: #0f1117;
+}
+
+.content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 100px 24px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.charts-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.card {
+  background: #1a1d2e;
+  border: 1px solid #2d3154;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.card h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+}

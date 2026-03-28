@@ -1,0 +1,12 @@
+# Backend
+crm-backend/__pycache__/
+crm-backend/**/*.pyc
+crm-backend/data/crm_dataset.zip
+
+# Frontend
+crm-frontend/node_modules/
+crm-frontend/dist/
+crm-frontend/.vite/
+
+# General
+.env

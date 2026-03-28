@@ -1,0 +1,11 @@
+rep_id,name,region,team,quota_usd,hire_date
+REP001,Drew Patel,West,Mid-Market,875000,2023-06-01
+REP002,Riley Carter,East,Mid-Market,760000,2022-11-01
+REP003,Jamie Wu,Central,Enterprise,856000,2021-05-01
+REP004,Casey Kim,West,Mid-Market,756000,2023-09-01
+REP005,Alex Rivera,East,SMB,616000,2024-01-01
+REP006,Chris Delgado,EMEA,Mid-Market,440000,2022-08-01
+REP007,Jordan Ellis,Central,Mid-Market,296000,2024-03-01
+REP008,Sam Okonkwo,EMEA,Enterprise,202000,2023-02-01
+REP009,Taylor Nguyen,West,SMB,176000,2023-08-01
+REP010,Morgan Blake,East,Mid-Market,144000,2022-02-01
