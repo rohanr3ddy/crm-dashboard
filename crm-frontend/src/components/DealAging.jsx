@@ -1,23 +1,62 @@
+import { useState } from 'react'
+
 const fmt = (n) => `$${(n / 1000).toFixed(0)}K`
 const ageColor = (d) => d > 120 ? '#ef4444' : d > 60 ? '#f59e0b' : '#10b981'
 
+const SortIcon = ({ col, sortCol, sortDir }) => {
+  if (sortCol !== col) return <span style={{ color: '#334155', marginLeft: '4px' }}>↕</span>
+  return <span style={{ color: '#6366f1', marginLeft: '4px' }}>{sortDir === 'asc' ? '↑' : '↓'}</span>
+}
+
+const TH = ({ children, col, align = 'left', sortCol, sortDir, onSort }) => (
+  <th
+    onClick={() => onSort(col)}
+    style={{
+      textAlign: align,
+      padding: '8px 12px',
+      cursor: 'pointer',
+      userSelect: 'none',
+      whiteSpace: 'nowrap',
+    }}
+  >
+    {children}<SortIcon col={col} sortCol={sortCol} sortDir={sortDir} />
+  </th>
+)
+
 export default function DealAging({ deals }) {
+  const [sortCol, setSortCol] = useState('days_open')
+  const [sortDir, setSortDir] = useState('desc')
+
+  const onSort = (col) => {
+    if (sortCol === col) setSortDir(d => d === 'asc' ? 'desc' : 'asc')
+    else { setSortCol(col); setSortDir('desc') }
+  }
+
+  const sorted = [...deals].sort((a, b) => {
+    let av = a[sortCol], bv = b[sortCol]
+    if (sortCol === 'close_date') { av = new Date(av); bv = new Date(bv) }
+    if (typeof av === 'string') return sortDir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av)
+    return sortDir === 'asc' ? av - bv : bv - av
+  })
+
+  const thProps = { sortCol, sortDir, onSort }
+
   return (
     <div className="card">
       <h2>Deal Aging — Stale Pipeline Risk</h2>
       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
         <thead>
           <tr style={{ color: '#64748b', borderBottom: '1px solid #2d3154' }}>
-            <th style={{ textAlign: 'left', padding: '8px 12px' }}>Account</th>
-            <th style={{ textAlign: 'left', padding: '8px 12px' }}>Rep</th>
-            <th style={{ textAlign: 'left', padding: '8px 12px' }}>Stage</th>
-            <th style={{ textAlign: 'right', padding: '8px 12px' }}>ARR</th>
-            <th style={{ textAlign: 'right', padding: '8px 12px' }}>Days Open</th>
-            <th style={{ textAlign: 'right', padding: '8px 12px' }}>Close Date</th>
+            <TH col="company_name" {...thProps}>Account</TH>
+            <TH col="name" {...thProps}>Rep</TH>
+            <TH col="stage" {...thProps}>Stage</TH>
+            <TH col="arr_usd" align="right" {...thProps}>ARR</TH>
+            <TH col="days_open" align="right" {...thProps}>Days Open</TH>
+            <TH col="close_date" align="right" {...thProps}>Close Date</TH>
           </tr>
         </thead>
         <tbody>
-          {deals.slice(0, 15).map((d) => (
+          {sorted.slice(0, 15).map((d) => (
             <tr key={d.opp_id} style={{ borderBottom: '1px solid #1e2235' }}>
               <td style={{ padding: '10px 12px', color: '#f1f5f9', fontWeight: 500 }}>{d.company_name}</td>
               <td style={{ padding: '10px 12px', color: '#94a3b8' }}>{d.name}</td>

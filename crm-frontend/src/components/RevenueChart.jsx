@@ -9,7 +9,15 @@ export default function RevenueChart({ data }) {
       <ResponsiveContainer width="100%" height={260}>
         <LineChart data={data} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#2d3154" />
-          <XAxis dataKey="month" stroke="#64748b" fontSize={11} />
+          <XAxis
+            dataKey="month"
+            stroke="#64748b"
+            fontSize={11}
+            tickFormatter={(val) => {
+              const [year, month] = val.split('-')
+              return new Date(year, month - 1).toLocaleString('default', { month: 'short' })
+            }}
+          />
           <YAxis stroke="#64748b" fontSize={11} tickFormatter={fmt} />
           <Tooltip
             contentStyle={{ background: '#1a1d2e', border: '1px solid #2d3154', borderRadius: '8px' }}

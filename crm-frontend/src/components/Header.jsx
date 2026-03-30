@@ -17,13 +17,13 @@ export default function Header() {
           fontSize: '16px'
         }}>📊</div>
         <div>
-          <div style={{ fontWeight: 700, fontSize: '15px', color: '#f1f5f9' }}>
-            NorthStar CRM
-          </div>
-          <div style={{ fontSize: '11px', color: '#64748b' }}>
-            Executive Revenue Dashboard
-          </div>
-        </div>
+		  <div style={{ fontWeight: 700, fontSize: '15px', color: '#f1f5f9' }}>
+			NorthStar CRM
+		  </div>
+		  <div style={{ fontSize: '11px', color: '#64748b' }}>
+			Executive Revenue Dashboard · As of Dec 31, 2025
+		  </div>
+		</div>
       </div>
       <a
         href="http://localhost:8000/api/download"
